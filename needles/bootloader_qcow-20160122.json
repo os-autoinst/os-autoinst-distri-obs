@@ -1,0 +1,15 @@
+{
+  "area": [
+    {
+      "height": 109,
+      "width": 273,
+      "xpos": 22,
+      "ypos": 63,
+      "type": "match"
+    }
+  ],
+  "tags": [
+    "bootloader_qcow"
+  ],
+  "properties": []
+}

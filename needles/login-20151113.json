@@ -1,0 +1,15 @@
+{
+  "properties": [],
+  "tags": [
+    "welcome_obs_appliance"
+  ],
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 403,
+      "width": 432,
+      "height": 56,
+      "type": "match"
+    }
+  ]
+}

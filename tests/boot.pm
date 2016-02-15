@@ -19,17 +19,26 @@ use strict;
 use testapi;
 
 sub run {
-    # wait for bootloader to appear
-    #assert_screen "bootloader", 30;
-    assert_screen "bootloader_qcow", 30;
-    # press enter to boot right away
-    #send_key "down";
-
-    send_key "ret";
-    # wait for the destroy all data on disk to appear
-    #assert_screen "prompt", 300;
-    #send_key "ret";    
+    if (get_var("BOOT_HDD_IMAGE")) {
+        assert_screen "bootloader_qcow", 30;
+        send_key "ret";    # boot from hd
+        #return;
+    }
     
+    if (check_var("FLAVOR", "ISO")) {
+        assert_screen "bootloader", 30;
+        send_key "down"; #install 
+        send_key "ret";
+        assert_screen "select_disk", 100;
+        #not sure how many disks will be offered in o.o.o
+        foreach my $i (0..20){
+            send_key "down";
+        }
+        send_key "spc"; #select option
+        send_key "ret"; #confirm
+        assert_screen "prompt", 30;
+        send_key "ret";
+    }
     assert_screen "login", 500;
     sleep(1);
     type_string "root";

@@ -19,7 +19,6 @@ use testapi;
 use autotest;
 
 autotest::loadtest "tests/boot.pm";
-autotest::loadtest "tests/check_obs_services.pm";
 autotest::loadtest "tests/clone_obs_repo.pm";
 
 

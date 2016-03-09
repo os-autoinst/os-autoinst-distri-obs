@@ -19,7 +19,7 @@ use testapi;
 use autotest;
 
 autotest::loadtest "tests/boot.pm";
-autotest::loadtest "tests/clone_obs_repo.pm";
+autotest::loadtest "tests/trigger_obs_appliance_tests.pm";
 
 
 1;

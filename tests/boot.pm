@@ -47,7 +47,7 @@ sub run {
     type_string "opensuse";
     type_string "\n";
     sleep(2);
-    if (check_screen "network_failed") {
+    if (check_screen "network_failed", 2) {
         record_soft_failure;
     }
 

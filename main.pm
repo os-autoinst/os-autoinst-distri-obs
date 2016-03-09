@@ -20,6 +20,7 @@ use autotest;
 
 autotest::loadtest "tests/boot.pm";
 autotest::loadtest "tests/trigger_obs_appliance_tests.pm";
+autotest::loadtest "tests/rspec_webui_tests.pm";
 
 
 1;

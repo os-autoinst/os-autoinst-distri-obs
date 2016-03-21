@@ -3,11 +3,12 @@ use strict;
 use testapi;
 
 sub run() {
-	assert_script_run("zypper -n --no-gpg-checks ref -s", 300);
-	assert_script_run("zypper -n dup", 200);
+	assert_script_run("zypper -n --no-gpg-checks ref -s", 400);
+	assert_script_run("zypper -n dup", 400);
 	assert_script_run("zypper -n in obs-tests-appliance obs-api-testsuite-deps ruby2.3-devel libxml2-devel libxslt-devel", 300);
 	script_run("echo -en \"[client]\nuser = root\npassword = opensuse\n\" > /root/.my.cnf");
-	script_run("prove -v /usr/lib/obs/tests/appliance/*.{t,ts} 2>&1 | tee /tmp/appliance_tests.txt", 360);
+	my $script="prove -v /usr/lib/obs/tests/appliance/*.{t,ts} 2>&1 | tee /tmp/appliance_tests.txt", 360;
+	validate_script_output $script, sub { m/All tests successful./ };
 	save_screenshot;
 	upload_logs("/tmp/appliance_tests.txt");
 	}

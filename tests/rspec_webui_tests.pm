@@ -15,5 +15,7 @@ sub test_flags() {
 
 sub post_fail_hook {
 	upload_logs("/tmp/rspec_tests.txt");
+	script_run("tar -cvf /tmp/capybara_screens.tar.gz /tmp/rspec_screens/*");
+	upload_logs("/tmp/capybara_screens.tar.gz");
 	}
 1;

@@ -15,9 +15,11 @@ sub test_flags() {
 
 sub post_fail_hook {
 	upload_logs("/tmp/rspec_tests.txt");
-	script_run("tar -cvf /tmp/capybara_screens.tar.gz /tmp/rspec_screens/*");
+	assert_script_run("tar -cvf /tmp/capybara_screens.tar.gz /tmp/rspec_screens/*");
 	upload_logs("/tmp/capybara_screens.tar.gz");
-	script_run("tar -cvf /tmp/srv_www_obs_api_logs.tar.gz /srv/www/obs/api/log/*");
+	assert_script_run("tar -cvf /tmp/srv_www_obs_api_logs.tar.gz /srv/www/obs/api/log/*");
 	upload_logs("/tmp/srv_www_obs_api_logs.tar.gz");
+	assert_script_run("tar -cvf /tmp/build_home_Admin.tar.gz /srv/obs/build/*");
+	upload_logs("/tmp/build_home_Admin.tar.gz");
 	}
 1;

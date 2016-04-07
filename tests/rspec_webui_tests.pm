@@ -21,5 +21,7 @@ sub post_fail_hook {
 	upload_logs("/tmp/srv_www_obs_api_logs.tar.bz2");
 	assert_script_run("tar cjf /tmp/srv_obs_build.tar.bz2 /srv/obs/build/*");
 	upload_logs("/tmp/srv_obs_build.tar.bz2");
+	assert_script_run("tar cjf /tmp/srv_obs_log.tar.bz2 /srv/obs/log/*");
+	upload_logs("/tmp/srv_obs_log.tar.bz2");
 	}
 1;

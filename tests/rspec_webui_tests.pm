@@ -7,6 +7,7 @@ sub run() {
 	assert_script_run("cd /tmp/open-build-service/dist/t"); # we don't need bundle install in the appliance!
 	assert_script_run("set -o pipefail; rspec --format documentation | tee /tmp/rspec_tests.txt", 480);
 	save_screenshot;
+	upload_logs("/tmp/rspec_tests.txt");
 	}
 
 sub test_flags() {
@@ -14,7 +15,6 @@ sub test_flags() {
 	}
 
 sub post_fail_hook {
-	upload_logs("/tmp/rspec_tests.txt");
 	assert_script_run("tar cjf /tmp/capybara_screens.tar.bz2 /tmp/rspec_screens/*");
 	upload_logs("/tmp/capybara_screens.tar.bz2");
 	assert_script_run("tar cjf /tmp/srv_www_obs_api_logs.tar.bz2 /srv/www/obs/api/log/*");

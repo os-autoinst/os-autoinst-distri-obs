@@ -22,12 +22,11 @@ sub run {
     if (get_var("BOOT_HDD_IMAGE")) {
         assert_screen "bootloader_qcow", 30;
         send_key "ret";    # boot from hd
-        #return;
     }
-    
+
     if (check_var("FLAVOR", "ISO")) {
         assert_screen "bootloader", 30;
-        send_key "down"; #install 
+        send_key "down"; #install
         send_key "ret";
         assert_screen "select_disk", 100;
         #not sure how many disks will be offered in o.o.o
@@ -39,18 +38,21 @@ sub run {
         assert_screen "prompt", 30;
         send_key "ret";
     }
-    assert_screen "login", 500;
-    sleep(1);
+    wait_serial "Welcome to OBS Appliance, based on openSUSE", 900;
+    #workaround because 1st console is stuck and goes black after 600s
+    send_key "ctrl-alt-f3";
+    assert_screen "console_login", 40;
+    #assert_screen "login", 800;
+    sleep(2);
     type_string "root";
     send_key "ret";
     sleep(1);
     type_string "opensuse";
-    type_string "\n";
+    send_key "ret";
     sleep(2);
     if (check_screen "network_failed", 2) {
         record_soft_failure;
     }
-
 }
 sub test_flags {
     # without anything - rollback to 'lastgood' snapshot if failed

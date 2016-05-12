@@ -39,10 +39,7 @@ sub run {
         send_key "ret";
     }
     wait_serial "Welcome to OBS Appliance, based on openSUSE", 900;
-    #workaround because 1st console is stuck and goes black after 600s
-    send_key "ctrl-alt-f3";
-    assert_screen "console_login", 40;
-    #assert_screen "login", 800;
+    send_key_until_needlematch("login", "ret", 20, 40);
     sleep(2);
     type_string "root";
     send_key "ret";
@@ -53,6 +50,7 @@ sub run {
     if (check_screen "network_failed", 2) {
         record_soft_failure;
     }
+    assert_script_run("systemd-analyze blame | tee -a /dev/$serialdev");
 }
 sub test_flags {
     # without anything - rollback to 'lastgood' snapshot if failed

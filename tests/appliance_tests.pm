@@ -3,8 +3,8 @@ use strict;
 use testapi;
 
 sub run() {
-	assert_script_run("zypper -vv -n --no-gpg-checks ref -s", 500);
-	assert_script_run("zypper -vv -n in --force-resolution --no-recommends obs-tests-appliance ruby2.3-devel libxml2-devel libxslt-devel", 300);
+	assert_script_run("zypper -vv -n --no-gpg-checks ref -s", 400);
+	assert_script_run("zypper -vv -n in --force-resolution --no-recommends obs-tests-appliance ruby2.3-devel libxml2-devel libxslt-devel", 600);
 	#get obs-server package version
 	script_run("rpm -q obs-server | tee -a /tmp/appliance_tests.txt");
 	script_run("echo -en \"[client]\nuser = root\npassword = opensuse\n\" > /root/.my.cnf");

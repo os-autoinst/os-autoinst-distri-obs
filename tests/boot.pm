@@ -51,6 +51,7 @@ sub run {
         record_soft_failure;
     }
     assert_script_run("systemd-analyze blame | tee -a /dev/$serialdev");
+    assert_script_run("cat /proc/sys/kernel/random/entropy_avail | tee -a /dev/$serialdev");
 }
 sub test_flags {
     # without anything - rollback to 'lastgood' snapshot if failed

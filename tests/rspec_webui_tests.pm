@@ -3,7 +3,12 @@ use strict;
 use testapi;
 
 sub run() {
-	assert_script_run("git clone --single-branch --branch master --depth 1 https://github.com/openSUSE/open-build-service.git  /tmp/open-build-service", 240);
+        my $branch = "master";
+        if ($VERSION != "Unstable") {
+          $branch = $VERSION;
+        }
+
+	assert_script_run("git clone --single-branch --branch $branch --depth 1 https://github.com/openSUSE/open-build-service.git  /tmp/open-build-service", 240);
 	assert_script_run("cd /tmp/open-build-service/dist/t"); # we don't need bundle install in the appliance!
 	assert_script_run("set -o pipefail; rspec --format documentation | tee /tmp/rspec_tests.txt", 480);
 	save_screenshot;

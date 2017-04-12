@@ -4,8 +4,8 @@ use testapi;
 
 sub run() {
         my $branch = "master";
-        if ($VERSION != "Unstable") {
-          $branch = $VERSION;
+        if (get_var('VERSION') != "Unstable") {
+          $branch = get_var('VERSION');
         }
 
 	assert_script_run("git clone --single-branch --branch $branch --depth 1 https://github.com/openSUSE/open-build-service.git  /tmp/open-build-service", 240);

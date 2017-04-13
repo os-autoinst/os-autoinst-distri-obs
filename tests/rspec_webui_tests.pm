@@ -10,7 +10,7 @@ sub run() {
 
 	assert_script_run("git clone --single-branch --branch $branch --depth 1 https://github.com/openSUSE/open-build-service.git  /tmp/open-build-service", 240);
         assert_script_run("cd /tmp/open-build-service/dist/t");
-        assert_script_run("zypper -vv -n in --force-resolution --no-recommends phantomjs", 600);
+        assert_script_run("zypper -vv -n --gpg-auto-import-keys in --force-resolution --no-recommends phantomjs", 600);
         assert_script_run("bundle.ruby2.4 install", 600);
 	assert_script_run("set -o pipefail; bundle.ruby2.4 exec rspec --format documentation | tee /tmp/rspec_tests.txt", 480);
 	save_screenshot;

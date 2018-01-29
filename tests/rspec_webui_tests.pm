@@ -30,6 +30,8 @@ sub post_fail_hook {
     upload_logs("/tmp/srv_obs_build.tar.bz2", failok => 1);
     script_run("tar cvfj /tmp/srv_obs_log.tar.bz2 /srv/obs/log/*");
     upload_logs("/tmp/srv_obs_log.tar.bz2", failok => 1);
+    script_run("tar cvfj /tmp/zypper_log.tar.bz2 /var/log/zypper.log");
+    upload_logs("/tmp/zypper_log.tar.bz2", failok => 1);
 }
 
 1;

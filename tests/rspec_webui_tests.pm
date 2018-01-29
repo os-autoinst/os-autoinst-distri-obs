@@ -10,7 +10,7 @@ sub run() {
 
     assert_script_run("git clone --single-branch --branch $branch --depth 1 https://github.com/openSUSE/open-build-service.git  /tmp/open-build-service", 240);
     assert_script_run("cd /tmp/open-build-service/dist/t");
-    assert_script_run("zypper -vv -n --gpg-auto-import-keys in --force-resolution --no-recommends phantomjs libxml2-devel libxslt-devel ruby2.4-devel", 600);
+    assert_script_run("zypper -vv -n --gpg-auto-import-keys in --force-resolution --no-recommends phantomjs libxml2-devel libxslt-devel ruby2.4-devel lsof", 600);
     assert_script_run("bundle.ruby2.4 install", 600);
     assert_script_run("set -o pipefail; bundle.ruby2.4 exec rspec --format documentation | tee /tmp/rspec_tests.txt", 600);
     save_screenshot;
@@ -22,14 +22,16 @@ sub test_flags() {
 }
 
 sub post_fail_hook {
-    assert_script_run("tar cvfj /tmp/capybara_screens.tar.bz2 /tmp/rspec_screens/*");
-    upload_logs("/tmp/capybara_screens.tar.bz2");
-    assert_script_run("tar cvfj /tmp/srv_www_obs_api_logs.tar.bz2 /srv/www/obs/api/log/*");
-    upload_logs("/tmp/srv_www_obs_api_logs.tar.bz2");
-    assert_script_run("tar cvfj /tmp/srv_obs_build.tar.bz2 /srv/obs/build/*");
-    upload_logs("/tmp/srv_obs_build.tar.bz2");
-    assert_script_run("tar cvfj /tmp/srv_obs_log.tar.bz2 /srv/obs/log/*");
-    upload_logs("/tmp/srv_obs_log.tar.bz2");
+    script_run("tar cvfj /tmp/capybara_screens.tar.bz2 /tmp/rspec_screens/*");
+    upload_logs("/tmp/capybara_screens.tar.bz2", failok => 1);
+    script_run("tar cvfj /tmp/srv_www_obs_api_logs.tar.bz2 /srv/www/obs/api/log/*");
+    upload_logs("/tmp/srv_www_obs_api_logs.tar.bz2", failok => 1);
+    script_run("tar cvfj /tmp/srv_obs_build.tar.bz2 /srv/obs/build/*");
+    upload_logs("/tmp/srv_obs_build.tar.bz2", failok => 1);
+    script_run("tar cvfj /tmp/srv_obs_log.tar.bz2 /srv/obs/log/*");
+    upload_logs("/tmp/srv_obs_log.tar.bz2", failok => 1);
+    script_run("tar cvfj /tmp/zypper_log.tar.bz2 /var/log/zypper.log");
+    upload_logs("/tmp/zypper_log.tar.bz2", failok => 1);
 }
 
 1;

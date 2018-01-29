@@ -22,14 +22,14 @@ sub test_flags() {
 }
 
 sub post_fail_hook {
-    assert_script_run("tar cvfj /tmp/capybara_screens.tar.bz2 /tmp/rspec_screens/*");
-    upload_logs("/tmp/capybara_screens.tar.bz2");
-    assert_script_run("tar cvfj /tmp/srv_www_obs_api_logs.tar.bz2 /srv/www/obs/api/log/*");
-    upload_logs("/tmp/srv_www_obs_api_logs.tar.bz2");
-    assert_script_run("tar cvfj /tmp/srv_obs_build.tar.bz2 /srv/obs/build/*");
-    upload_logs("/tmp/srv_obs_build.tar.bz2");
-    assert_script_run("tar cvfj /tmp/srv_obs_log.tar.bz2 /srv/obs/log/*");
-    upload_logs("/tmp/srv_obs_log.tar.bz2");
+    script_run("tar cvfj /tmp/capybara_screens.tar.bz2 /tmp/rspec_screens/*");
+    upload_logs("/tmp/capybara_screens.tar.bz2", failok => 1);
+    script_run("tar cvfj /tmp/srv_www_obs_api_logs.tar.bz2 /srv/www/obs/api/log/*");
+    upload_logs("/tmp/srv_www_obs_api_logs.tar.bz2", failok => 1);
+    script_run("tar cvfj /tmp/srv_obs_build.tar.bz2 /srv/obs/build/*");
+    upload_logs("/tmp/srv_obs_build.tar.bz2", failok => 1);
+    script_run("tar cvfj /tmp/srv_obs_log.tar.bz2 /srv/obs/log/*");
+    upload_logs("/tmp/srv_obs_log.tar.bz2", failok => 1);
 }
 
 1;

@@ -17,7 +17,9 @@
 use strict;
 use testapi;
 use autotest;
+use distribution;
 
+testapi::set_distribution(distribution->new);
 autotest::loadtest "tests/boot.pm";
 autotest::loadtest "tests/rspec_webui_tests.pm";
 

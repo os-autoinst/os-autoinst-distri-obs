@@ -7,7 +7,7 @@ sub run() {
     my $tests_packages = "chromedriver xorg-x11-fonts";
     if (get_var('VERSION') != "Unstable") {
         $branch = get_var('VERSION');
-        $tests_packages = "phantomjs";
+        $tests_packages = "phantomjs" unless get_var('VERSION') == "2.10"
     }
 
     my $ruby_version = "2.5";

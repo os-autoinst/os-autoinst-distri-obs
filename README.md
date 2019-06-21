@@ -4,6 +4,7 @@ openQA tests for Open Build Service Appliances
 Currently we test:
 
 - [Unstable](https://build.opensuse.org/project/show/OBS:Server:Unstable)
+- [2.10:Staging](https://build.opensuse.org/project/show/OBS:Server:2.10:Staging)
 - [2.9:Staging](https://build.opensuse.org/project/show/OBS:Server:2.9:Staging)
 - [2.8:Staging](https://build.opensuse.org/project/show/OBS:Server:2.8:Staging)
 

@@ -1,15 +1,14 @@
 {
-  "properties": [],
   "area": [
     {
-      "ypos": 377,
-      "match": 90,
-      "width": 109,
+      "xpos": 0,
       "height": 21,
+      "width": 212,
       "type": "match",
-      "xpos": 2
+      "ypos": 379
     }
   ],
+  "properties": [],
   "tags": [
     "login"
   ]

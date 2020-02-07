@@ -11,9 +11,6 @@ sub run() {
     }
 
     my $ruby_version = "2.5";
-    if (get_var('VERSION') == "2.8") {
-        $ruby_version = "2.4";
-    }
 
     assert_script_run("git clone --single-branch --branch $branch --depth 1 https://github.com/openSUSE/open-build-service.git  /tmp/open-build-service", 240);
     assert_script_run("cd /tmp/open-build-service/dist/t");

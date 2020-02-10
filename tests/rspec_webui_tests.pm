@@ -18,9 +18,11 @@ sub run() {
     assert_script_run("zypper -vv -n --gpg-auto-import-keys in --force-resolution --no-recommends $tests_packages libxml2-devel libxslt-devel ruby$ruby_version-devel", 600);
     assert_script_run("git clone --single-branch --branch $branch --depth 1 https://github.com/openSUSE/open-build-service.git /tmp/open-build-service", 240);
     assert_script_run("cd /tmp/open-build-service/dist/t");
+    assert_script_run("set -o pipefail; prove -v *-check_required_services.ts | tee /tmp/check_required_services_tests.txt");
     assert_script_run("bundle.ruby$ruby_version install", 600);
     assert_script_run("set -o pipefail; bundle.ruby$ruby_version exec rspec --format documentation | tee /tmp/rspec_tests.txt", 600);
     save_screenshot;
+    upload_logs("/tmp/check_required_services_tests.txt");
     upload_logs("/tmp/rspec_tests.txt");
 }
 
@@ -29,6 +31,7 @@ sub test_flags() {
 }
 
 sub post_fail_hook {
+    upload_logs("/tmp/check_required_services_tests.txt", failok => 1);
     upload_logs("/tmp/rspec_tests.txt", failok => 1);
     script_run("tar cvfj /tmp/capybara_screens.tar.bz2 /tmp/rspec_screens/*");
     upload_logs("/tmp/capybara_screens.tar.bz2", failok => 1);

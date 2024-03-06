@@ -9,7 +9,7 @@ sub run() {
     }
 
     assert_script_run("curl -O https://raw.githubusercontent.com/openSUSE/open-build-service/$branch/dist/t/Makefile", 240);
-    assert_script_run("set -o pipefail; make install | tee /tmp/make_install_log.txt", 840);
+    assert_script_run("set -o pipefail; make install 2>&1 | tee /tmp/make_install_log.txt", 840);
     assert_script_run("cd /tmp/open-build-service/dist/t");
     assert_script_run("set -o pipefail; prove -v *-check_required_services.ts | tee /tmp/check_required_services_tests.txt", 300);
     assert_script_run("set -o pipefail; make test | tee /tmp/rspec_tests.txt", 600);

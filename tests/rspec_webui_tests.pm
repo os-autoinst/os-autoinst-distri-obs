@@ -12,7 +12,7 @@ sub run() {
     assert_script_run("set -o pipefail; make install 2>&1 | tee /tmp/make_install_log.txt", 840);
     assert_script_run("cd /tmp/open-build-service/dist/t");
     assert_script_run("set -o pipefail; prove -v *-check_required_services.ts | tee /tmp/check_required_services_tests.txt", 300);
-    assert_script_run("set -o pipefail; make test | tee /tmp/rspec_tests.txt", 600);
+    assert_script_run("set -o pipefail; timeout 550 make test | tee /tmp/rspec_tests.txt", 600);
     save_screenshot;
     upload_logs("/tmp/check_required_services_tests.txt");
     upload_logs("/tmp/rspec_tests.txt");
